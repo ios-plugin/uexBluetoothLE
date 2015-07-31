@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4295E35E1B6B72FE00F18974 /* EUExBluetoothLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */; };
+		4295E35F1B6B72FE00F18974 /* uexBLEInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4295E32D1B6B722800F18974 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4295E32F1B6B722800F18974 /* libuexBluetoothLE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexBluetoothLE.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4295E34B1B6B72FE00F18974 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
+		4295E34C1B6B72FE00F18974 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
+		4295E34D1B6B72FE00F18974 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
+		4295E34E1B6B72FE00F18974 /* WidgetOneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetOneDelegate.h; sourceTree = "<group>"; };
+		4295E34F1B6B72FE00F18974 /* EUExBluetoothLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBluetoothLE.h; sourceTree = "<group>"; };
+		4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUExBluetoothLE.m; sourceTree = "<group>"; };
+		4295E3521B6B72FE00F18974 /* EUExBluetoothLE_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBluetoothLE_PrefixHeader.pch; sourceTree = "<group>"; };
+		4295E3541B6B72FE00F18974 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		4295E3551B6B72FE00F18974 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
+		4295E3561B6B72FE00F18974 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		4295E3571B6B72FE00F18974 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		4295E3581B6B72FE00F18974 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		4295E3591B6B72FE00F18974 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		4295E35A1B6B72FE00F18974 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		4295E35B1B6B72FE00F18974 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		4295E35C1B6B72FE00F18974 /* uexBLEInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexBLEInstance.h; sourceTree = "<group>"; };
+		4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uexBLEInstance.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4295E32C1B6B722800F18974 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4295E3261B6B722800F18974 = {
+			isa = PBXGroup;
+			children = (
+				4295E3491B6B72FE00F18974 /* EUExBluetoothLE */,
+				4295E3301B6B722800F18974 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4295E3301B6B722800F18974 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4295E32F1B6B722800F18974 /* libuexBluetoothLE.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4295E3491B6B72FE00F18974 /* EUExBluetoothLE */ = {
+			isa = PBXGroup;
+			children = (
+				4295E34A1B6B72FE00F18974 /* engineHeader */,
+				4295E34F1B6B72FE00F18974 /* EUExBluetoothLE.h */,
+				4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */,
+				4295E3511B6B72FE00F18974 /* sourceCode */,
+			);
+			path = EUExBluetoothLE;
+			sourceTree = "<group>";
+		};
+		4295E34A1B6B72FE00F18974 /* engineHeader */ = {
+			isa = PBXGroup;
+			children = (
+				4295E34B1B6B72FE00F18974 /* EUExBase.h */,
+				4295E34C1B6B72FE00F18974 /* EUExBaseDefine.h */,
+				4295E34D1B6B72FE00F18974 /* EUtility.h */,
+				4295E34E1B6B72FE00F18974 /* WidgetOneDelegate.h */,
+			);
+			path = engineHeader;
+			sourceTree = "<group>";
+		};
+		4295E3511B6B72FE00F18974 /* sourceCode */ = {
+			isa = PBXGroup;
+			children = (
+				4295E3521B6B72FE00F18974 /* EUExBluetoothLE_PrefixHeader.pch */,
+				4295E3531B6B72FE00F18974 /* JSON */,
+				4295E35C1B6B72FE00F18974 /* uexBLEInstance.h */,
+				4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */,
+			);
+			path = sourceCode;
+			sourceTree = "<group>";
+		};
+		4295E3531B6B72FE00F18974 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				4295E3541B6B72FE00F18974 /* JSON.h */,
+				4295E3551B6B72FE00F18974 /* JSONParser.h */,
+				4295E3561B6B72FE00F18974 /* NSObject+SBJSON.h */,
+				4295E3571B6B72FE00F18974 /* NSString+SBJSON.h */,
+				4295E3581B6B72FE00F18974 /* SBJSON.h */,
+				4295E3591B6B72FE00F18974 /* SBJsonBase.h */,
+				4295E35A1B6B72FE00F18974 /* SBJsonParser.h */,
+				4295E35B1B6B72FE00F18974 /* SBJsonWriter.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4295E32E1B6B722800F18974 /* EUExBluetoothLE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4295E3431B6B722800F18974 /* Build configuration list for PBXNativeTarget "EUExBluetoothLE" */;
+			buildPhases = (
+				4295E32B1B6B722800F18974 /* Sources */,
+				4295E32C1B6B722800F18974 /* Frameworks */,
+				4295E32D1B6B722800F18974 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EUExBluetoothLE;
+			productName = EUExBluetoothLE;
+			productReference = 4295E32F1B6B722800F18974 /* libuexBluetoothLE.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4295E3271B6B722800F18974 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = AppCan;
+				TargetAttributes = {
+					4295E32E1B6B722800F18974 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 4295E32A1B6B722800F18974 /* Build configuration list for PBXProject "EUExBluetoothLE" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4295E3261B6B722800F18974;
+			productRefGroup = 4295E3301B6B722800F18974 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4295E32E1B6B722800F18974 /* EUExBluetoothLE */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4295E32B1B6B722800F18974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4295E35F1B6B72FE00F18974 /* uexBLEInstance.m in Sources */,
+				4295E35E1B6B72FE00F18974 /* EUExBluetoothLE.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4295E3411B6B722800F18974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4295E3421B6B722800F18974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4295E3441B6B722800F18974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = $SRCROOT/uexBluetoothLE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = $SRCROOT/EUExBluetoothLE/sourceCode/EUExBluetoothLE_PrefixHeader.pch;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexBluetoothLE;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4295E3451B6B722800F18974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = $SRCROOT/uexBluetoothLE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = $SRCROOT/EUExBluetoothLE/sourceCode/EUExBluetoothLE_PrefixHeader.pch;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexBluetoothLE;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4295E32A1B6B722800F18974 /* Build configuration list for PBXProject "EUExBluetoothLE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4295E3411B6B722800F18974 /* Debug */,
+				4295E3421B6B722800F18974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4295E3431B6B722800F18974 /* Build configuration list for PBXNativeTarget "EUExBluetoothLE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4295E3441B6B722800F18974 /* Debug */,
+				4295E3451B6B722800F18974 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4295E3271B6B722800F18974 /* Project object */;
+}
