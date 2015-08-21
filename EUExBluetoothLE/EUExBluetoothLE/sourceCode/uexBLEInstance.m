@@ -172,7 +172,7 @@ NSString *const uexBLEValue=@"value";
     if(!(characteristic.properties & CBCharacteristicPropertyWrite)&&(characteristic.properties & CBCharacteristicWriteWithoutResponse)){
         type=CBCharacteristicWriteWithoutResponse;
     }
-    [self.currentPeripheral writeValue:[dataStr dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:type];
+    [self.currentPeripheral writeValue:[self base64Decode:dataStr] forCharacteristic:characteristic type:type];
 }
 
 -(void)readDescriptor:(NSString*)descriptorUUID
@@ -224,7 +224,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"cannot find descriptor"];
         return;
     }
-    [self.currentPeripheral writeValue:[dataStr dataUsingEncoding:NSUTF8StringEncoding] forDescriptor:descriptor];
+    [self.currentPeripheral writeValue:[self base64Decode:dataStr] forDescriptor:descriptor];
     
 }
 
@@ -464,14 +464,16 @@ NSString *const uexBLEValue=@"value";
     id value=descriptor.value;
     if([value isKindOfClass:[NSNumber class]]){
         valueStr=[value stringValue];
+        [dict setValue:@(NO) forKey:@"needDecode"];
     }
     if([value isKindOfClass:[NSString class]]){
-        NSString *tmp=(NSString *)value;
-        valueStr=[tmp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      
+        valueStr=(NSString *)value;
+        [dict setValue:@(NO) forKey:@"needDecode"];
     }
-    if([value isKindOfClass:[NSDate class]]){
-        NSData* tmp=(NSData*)value;
-        valueStr=[[NSString alloc] initWithData:tmp encoding:NSUTF8StringEncoding];
+    if([value isKindOfClass:[NSData class]]){
+        valueStr=[self base64Encode:(NSData*)value];
+        [dict setValue:@(YES) forKey:@"needDecode"];
     }
     [dict setValue:valueStr forKey:uexBLEValue];
     
@@ -491,7 +493,7 @@ NSString *const uexBLEValue=@"value";
 
     [dict setValue:characteristic.service.UUID.UUIDString forKey:uexBLEServiceKey];
     [dict setValue:characteristic.UUID.UUIDString forKey:@"UUID"];
-    NSString *valueStr=[[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    NSString *valueStr=[self base64Encode:characteristic.value];
     [dict setValue:valueStr forKey:uexBLEValue];
     NSMutableArray *descriptorList=[NSMutableArray array];
     for(CBDescriptor *descriptor in characteristic.descriptors){
@@ -516,16 +518,17 @@ NSString *const uexBLEValue=@"value";
     return dict;
 }
 
-#pragma mark - Base64Encode
--(NSString *)encode:(NSData*)data{
-    NSData *base64Data=[data base64EncodedDataWithOptions:0];
-    NSString *resultStr= [NSString stringWithUTF8String:[base64Data bytes]];
+#pragma mark - Base64 Encode & Decode
+-(NSString *)base64Encode:(NSData*)data{
+    
+    
+    //NSData *base64Data=[data base64EncodedDataWithOptions:0];
+    NSString *resultStr= [data base64EncodedStringWithOptions:0];
     return resultStr;
 }
 
--(NSData *)decode:(NSString *)dataStr{
-    NSData *base64Data=[dataStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *data=[[NSData alloc]initWithBase64EncodedData:base64Data options:0];
+-(NSData *)base64Decode:(NSString *)dataStr{
+    NSData *data=[[NSData alloc] initWithBase64EncodedString:dataStr options:0];
     return data;
 }
 
