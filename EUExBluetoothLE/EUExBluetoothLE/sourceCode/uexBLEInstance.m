@@ -342,13 +342,15 @@ NSString *const uexBLEValue=@"value";
 }
 #pragma mark - CBCentralManagerDelegate
 -(void)centralManagerDidUpdateState:(CBCentralManager *)central{
-    NSString *stateStr=@"";
+    NSString *stateStr=nil;
+    NSNumber *resultCode = @1;
     switch (central.state) {
         case CBCentralManagerStatePoweredOff:
             stateStr=@"CentralManagerStatePoweredOff";
             break;
         case CBCentralManagerStatePoweredOn:
             stateStr=@"CentralManagerStatePoweredOn";
+            resultCode=@0;
             break;
         case CBCentralManagerStateResetting:
             stateStr=@"CentralManagerStateResetting";
@@ -364,6 +366,10 @@ NSString *const uexBLEValue=@"value";
             break;
 
     }
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    [dict setValue:resultCode forKey:@"resultCode:"];
+    [dict setValue:stateStr forKey:@"info"];
+    [self callBackJsonWithName:@"cbInit" Object:dict];
     [self log:[NSString stringWithFormat:@"BLEMgr status change to %@",stateStr]];
 }
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
