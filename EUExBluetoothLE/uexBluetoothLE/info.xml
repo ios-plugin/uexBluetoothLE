@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
     <plugin
-        uexName="uexBluetoothLE" version="3.0.1" build="1">
-        <info>1:修改读写的字符串均为为Base64编码</info>
+        uexName="uexBluetoothLE" version="3.0.2" build="2">
+        <info>2:修复一个会导致Characteristic写入失败的bug</info>
+        <build>1:修改读写的字符串均为为Base64编码</build>
         <build>0:低功耗蓝牙插件 for iOS</build>
-        
     </plugin>
 </uexplugins>

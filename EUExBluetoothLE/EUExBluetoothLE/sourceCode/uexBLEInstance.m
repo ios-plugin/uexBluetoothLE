@@ -169,8 +169,11 @@ NSString *const uexBLEValue=@"value";
         return;
     }
     CBCharacteristicWriteType type=CBCharacteristicWriteWithResponse;
-    if(!(characteristic.properties & CBCharacteristicPropertyWrite)&&(characteristic.properties & CBCharacteristicWriteWithoutResponse)){
+    if((characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)){
         type=CBCharacteristicWriteWithoutResponse;
+    }
+    if((characteristic.properties & CBCharacteristicPropertyWrite)){
+        type=CBCharacteristicWriteWithResponse;
     }
     [self.currentPeripheral writeValue:[self base64Decode:dataStr] forCharacteristic:characteristic type:type];
 }
