@@ -11,18 +11,6 @@
 		4295E35F1B6B72FE00F18974 /* uexBLEInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4295E32D1B6B722800F18974 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		4295E32F1B6B722800F18974 /* libuexBluetoothLE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexBluetoothLE.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4295E34B1B6B72FE00F18974 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
@@ -128,7 +116,6 @@
 			buildPhases = (
 				4295E32B1B6B722800F18974 /* Sources */,
 				4295E32C1B6B722800F18974 /* Frameworks */,
-				4295E32D1B6B722800F18974 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -308,6 +295,7 @@
 				4295E3451B6B722800F18974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
