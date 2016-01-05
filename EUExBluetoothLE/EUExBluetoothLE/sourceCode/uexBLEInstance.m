@@ -370,7 +370,7 @@ NSString *const uexBLEValue=@"value";
 
     }
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    [dict setValue:resultCode forKey:@"resultCode:"];
+    [dict setValue:resultCode forKey:@"resultCode"];
     [dict setValue:stateStr forKey:@"info"];
     [self callBackJsonWithName:@"cbInit" Object:dict];
     [self log:[NSString stringWithFormat:@"BLEMgr status change to %@",stateStr]];
