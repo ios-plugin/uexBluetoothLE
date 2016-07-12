@@ -7,168 +7,145 @@
 //
 
 #import "EUExBluetoothLE.h"
-#import "EUtility.h"
 #import "uexBLEInstance.h"
 @interface EUExBluetoothLE()
+
 @property(nonatomic,weak)uexBLEInstance *BLE;
+
 @end
 
 
 
 
 @implementation EUExBluetoothLE
--(id)initWithBrwView:(EBrowserView *)eInBrwView
+
+
+- (instancetype)initWithWebViewEngine:(id<AppCanWebViewEngineObject>)engine
 {
-    self = [super initWithBrwView:eInBrwView];
+    self = [super initWithWebViewEngine:engine];
     if (self) {
-        
         
     }
     return self;
 }
 
 
--(void)clean{
-    _BLE.callback=nil;
+- (void)clean{
 }
--(void)dealloc{
+- (void)dealloc{
     [self clean];
 }
 
 
--(void)init:(NSMutableArray *)inArgumrnts{
-    _BLE=[uexBLEInstance sharedInstance];
-    _BLE.callback=self.meBrwView;
+- (void)init:(NSMutableArray *)inArgumrnts{
+    self.BLE = [uexBLEInstance sharedInstance];
+
 }
 
--(void)scanDevice:(NSMutableArray *)inArgumrnts{
-    NSArray *services=nil;
-    if([inArgumrnts count]>0){
-        id info =[self getDataFromJson:inArgumrnts[0]];
-        if([info isKindOfClass:[NSArray class]]) services=info;
-            
-        
+- (void)scanDevice:(NSMutableArray *)inArgumrnts{
+
+    ACArgsUnpack(NSArray *services) = inArgumrnts;
+    [self.BLE scanDevice:services];
+}
+
+
+- (void)stopScanDevice:(NSMutableArray *)inArgumrnts{
+    [self.BLE stopScanDevice];
+}
+
+- (void)connect:(NSMutableArray *)inArgumrnts{
+    
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *UUID = stringArg(info[@"address"]);
+    if (UUID) {
+        [self.BLE connect:UUID];
     }
-    [_BLE scanDevice:services];
+
 }
 
+- (void)disconnect:(NSMutableArray *)inArgumrnts{
+    [self.BLE disconnect];
 
--(void)stopScanDevice:(NSMutableArray *)inArgumrnts{
-    [_BLE stopScanDevice];
 }
-
--(void)connect:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if([info isKindOfClass:[NSDictionary class]]&&[info objectForKey:@"address"]){
-        [_BLE connect:[info objectForKey:@"address"]];
+- (void)searchForCharacteristic:(NSMutableArray *)inArgumrnts{
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *UUID = stringArg(info[uexBLEServiceKey]);
+    if (UUID) {
+        [self.BLE searchForCharacteristic:UUID];
     }
 }
 
--(void)disconnect:(NSMutableArray *)inArgumrnts{
-    [_BLE disconnect];
-
-}
--(void)searchForCharacteristic:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    [_BLE searchForCharacteristic:sUUID];
-
-}
-
--(void)searchForDescriptor:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    NSString *cUUID=[info objectForKey:uexBLECharacteristicKey];
-    if(!cUUID)return;
-    [_BLE searchForDescriptor:sUUID characteristic:cUUID];
+- (void)searchForDescriptor:(NSMutableArray *)inArgumrnts{
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    if (!serviceUUID || !characteristicUUID) {
+        return;
+    }
+    [self.BLE searchForDescriptor:serviceUUID characteristic:characteristicUUID];
  
 }
--(void)readCharacteristic:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    NSString *cUUID=[info objectForKey:uexBLECharacteristicKey];
-    if(!cUUID)return;
-    [_BLE readCharacteristic:cUUID inService:sUUID];
-}
--(void)writeCharacteristic:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    NSString *cUUID=[info objectForKey:uexBLECharacteristicKey];
-    if(!cUUID)return;
-    NSString *value=[info objectForKey:uexBLEValue];
-    if(!value)return;
-    [_BLE writeCharacteristic:cUUID inService:sUUID withDataString:value];
-}
-
--(void)readDescriptor:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    NSString *cUUID=[info objectForKey:uexBLECharacteristicKey];
-    if(!cUUID)return;
-    NSString *dUUID=[info objectForKey:uexBLEDescripterKey];
-    if(!dUUID)return;
-    [_BLE readDescriptor:dUUID inCharacteristic:cUUID inService:sUUID];
-    
-}
--(void)writeDescriptor:(NSMutableArray *)inArgumrnts{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
-    if(![info isKindOfClass:[NSDictionary class]])return;
-    NSString *sUUID=[info objectForKey:uexBLEServiceKey];
-    if(!sUUID)return;
-    NSString *cUUID=[info objectForKey:uexBLECharacteristicKey];
-    if(!cUUID)return;
-    NSString *dUUID=[info objectForKey:uexBLEDescripterKey];
-    if(!dUUID)return;
-    NSString *value=[info objectForKey:uexBLEValue];
-    if(!value)return;
-    [_BLE writeDescriptor:dUUID inCharacteristic:cUUID inService:sUUID dataString:value];
-    
-}
-
-#pragma mark - Private Method
-
-- (id)getDataFromJson:(NSString *)jsonStr{
-    
-    NSError *error = nil;
-    
-    
-    
-    NSData *jsonData= [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                    options:NSJSONReadingMutableContainers
-                                                      error:&error];
-    
-    if (jsonObject != nil && error == nil){
-        
-        return jsonObject;
-    }else{
-        
-        // 解析錯誤
-        
-        return nil;
+- (void)readCharacteristic:(NSMutableArray *)inArgumrnts{
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    if (!serviceUUID || !characteristicUUID) {
+        return;
     }
+    [self.BLE readCharacteristic:characteristicUUID inService:serviceUUID];
+}
+- (void)writeCharacteristic:(NSMutableArray *)inArgumrnts{
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    NSString *dataStr = stringArg(info[uexBLEValue]);
+    if (!serviceUUID || !characteristicUUID || !dataStr) {
+        return;
+    }
+    [self.BLE writeCharacteristic:characteristicUUID inService:serviceUUID withDataString:dataStr];
+}
+
+- (void)readDescriptor:(NSMutableArray *)inArgumrnts{
+    
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    NSString *descriptorUUID = stringArg(info[uexBLEDescriptorKey]);
+    if (!serviceUUID || !characteristicUUID || !descriptorUUID) {
+        return;
+    }
+    [self.BLE readDescriptor:descriptorUUID inCharacteristic:characteristicUUID inService:serviceUUID];
+
+    
+}
+- (void)writeDescriptor:(NSMutableArray *)inArgumrnts{
+    ACArgsUnpack(NSDictionary *info) = inArgumrnts;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    NSString *descriptorUUID = stringArg(info[uexBLEDescriptorKey]);
+    NSString *dataStr = stringArg(info[uexBLEValue]);
+    if (!serviceUUID || !characteristicUUID || !descriptorUUID || !dataStr) {
+        return;
+    }
+    [self.BLE writeDescriptor:descriptorUUID inCharacteristic:characteristicUUID inService:serviceUUID dataString:dataStr];
     
 }
 
 
+- (void)readRemoteRssi:(NSMutableArray *)inArguments{
+    [self.BLE readRSSI];
+}
 
+- (void)setCharacteristicNotification:(NSMutableArray *)inArguments{
+    ACArgsUnpack(NSDictionary *info) = inArguments;
+    NSString *serviceUUID = stringArg(info[uexBLEServiceKey]);
+    NSString *characteristicUUID = stringArg(info[uexBLECharacteristicKey]);
+    NSNumber *enableNum = numberArg(info[@"enable"]);
+    if (!serviceUUID || !characteristicUUID || !enableNum) {
+        return;
+    }
+    [self.BLE setNotifyEnable:enableNum.boolValue forCharacteristic:characteristicUUID inService:serviceUUID];
+    
+}
 
 @end

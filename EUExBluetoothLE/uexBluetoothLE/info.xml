@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
     <plugin
-        uexName="uexBluetoothLE" version="3.0.4" build="4">
-        <info>4:修复cbInit回调参数错误的bug</info>
+        uexName="uexBluetoothLE" version="4.0.0" build="5">
+        <info>5:适配4.0引擎</info>
+        <build>4:修复cbInit回调参数错误的bug</build>
         <build>3:添加IDE支持</build>
         <build>2:修复一个会导致Characteristic写入失败的bug</build>
         <build>1:修改读写的字符串均为为Base64编码</build>

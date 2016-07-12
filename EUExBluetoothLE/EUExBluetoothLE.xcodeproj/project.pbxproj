@@ -9,27 +9,29 @@
 /* Begin PBXBuildFile section */
 		4295E35E1B6B72FE00F18974 /* EUExBluetoothLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */; };
 		4295E35F1B6B72FE00F18974 /* uexBLEInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */; };
+		42C754881D33685200977E46 /* AppCanKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C754871D33685200977E46 /* AppCanKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4295E32D1B6B722800F18974 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4295E32F1B6B722800F18974 /* libuexBluetoothLE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexBluetoothLE.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4295E34B1B6B72FE00F18974 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
-		4295E34C1B6B72FE00F18974 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
-		4295E34D1B6B72FE00F18974 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
-		4295E34E1B6B72FE00F18974 /* WidgetOneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetOneDelegate.h; sourceTree = "<group>"; };
 		4295E34F1B6B72FE00F18974 /* EUExBluetoothLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBluetoothLE.h; sourceTree = "<group>"; };
 		4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUExBluetoothLE.m; sourceTree = "<group>"; };
 		4295E3521B6B72FE00F18974 /* EUExBluetoothLE_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBluetoothLE_PrefixHeader.pch; sourceTree = "<group>"; };
-		4295E3541B6B72FE00F18974 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		4295E3551B6B72FE00F18974 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
-		4295E3561B6B72FE00F18974 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		4295E3571B6B72FE00F18974 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		4295E3581B6B72FE00F18974 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
-		4295E3591B6B72FE00F18974 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		4295E35A1B6B72FE00F18974 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		4295E35B1B6B72FE00F18974 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		4295E35C1B6B72FE00F18974 /* uexBLEInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexBLEInstance.h; sourceTree = "<group>"; };
 		4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uexBLEInstance.m; sourceTree = "<group>"; };
+		42C754871D33685200977E46 /* AppCanKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCanKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C754881D33685200977E46 /* AppCanKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +65,7 @@
 		4295E3491B6B72FE00F18974 /* EUExBluetoothLE */ = {
 			isa = PBXGroup;
 			children = (
-				4295E34A1B6B72FE00F18974 /* engineHeader */,
+				42C754871D33685200977E46 /* AppCanKit.framework */,
 				4295E34F1B6B72FE00F18974 /* EUExBluetoothLE.h */,
 				4295E3501B6B72FE00F18974 /* EUExBluetoothLE.m */,
 				4295E3511B6B72FE00F18974 /* sourceCode */,
@@ -70,41 +73,14 @@
 			path = EUExBluetoothLE;
 			sourceTree = "<group>";
 		};
-		4295E34A1B6B72FE00F18974 /* engineHeader */ = {
-			isa = PBXGroup;
-			children = (
-				4295E34B1B6B72FE00F18974 /* EUExBase.h */,
-				4295E34C1B6B72FE00F18974 /* EUExBaseDefine.h */,
-				4295E34D1B6B72FE00F18974 /* EUtility.h */,
-				4295E34E1B6B72FE00F18974 /* WidgetOneDelegate.h */,
-			);
-			path = engineHeader;
-			sourceTree = "<group>";
-		};
 		4295E3511B6B72FE00F18974 /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
 				4295E3521B6B72FE00F18974 /* EUExBluetoothLE_PrefixHeader.pch */,
-				4295E3531B6B72FE00F18974 /* JSON */,
 				4295E35C1B6B72FE00F18974 /* uexBLEInstance.h */,
 				4295E35D1B6B72FE00F18974 /* uexBLEInstance.m */,
 			);
 			path = sourceCode;
-			sourceTree = "<group>";
-		};
-		4295E3531B6B72FE00F18974 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				4295E3541B6B72FE00F18974 /* JSON.h */,
-				4295E3551B6B72FE00F18974 /* JSONParser.h */,
-				4295E3561B6B72FE00F18974 /* NSObject+SBJSON.h */,
-				4295E3571B6B72FE00F18974 /* NSString+SBJSON.h */,
-				4295E3581B6B72FE00F18974 /* SBJSON.h */,
-				4295E3591B6B72FE00F18974 /* SBJsonBase.h */,
-				4295E35A1B6B72FE00F18974 /* SBJsonParser.h */,
-				4295E35B1B6B72FE00F18974 /* SBJsonWriter.h */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,6 +92,7 @@
 			buildPhases = (
 				4295E32B1B6B722800F18974 /* Sources */,
 				4295E32C1B6B722800F18974 /* Frameworks */,
+				4295E32D1B6B722800F18974 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -252,6 +229,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = $SRCROOT/uexBluetoothLE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExBluetoothLE",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = $SRCROOT/EUExBluetoothLE/sourceCode/EUExBluetoothLE_PrefixHeader.pch;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -266,6 +247,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = $SRCROOT/uexBluetoothLE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExBluetoothLE",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = $SRCROOT/EUExBluetoothLE/sourceCode/EUExBluetoothLE_PrefixHeader.pch;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
