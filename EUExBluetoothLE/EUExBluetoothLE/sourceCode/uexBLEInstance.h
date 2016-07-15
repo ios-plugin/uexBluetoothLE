@@ -15,7 +15,7 @@
 
 
 
-@end
+
 extern NSString *const uexBLEServiceKey;
 extern NSString *const uexBLECharacteristicKey;
 extern NSString *const uexBLEDescriptorKey;
