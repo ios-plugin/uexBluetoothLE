@@ -13,7 +13,8 @@
         <method name="writeCharacteristic"></method>
         <method name="readDescriptor"></method>
         <method name="writeDescriptor"></method>
-        
+        <method name="readRemoteRssi"></method>
+        <method name="setCharacteristicNotification"></method>
         
     </plugin>
 </uexplugins>

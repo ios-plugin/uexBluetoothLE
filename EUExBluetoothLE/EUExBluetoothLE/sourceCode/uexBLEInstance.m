@@ -44,8 +44,8 @@ NSString *const uexBLEValue=@"value";
 -(instancetype)init{
     self=[super init];
     if(self){
-        _BLEMgr=[[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        _discoveredPeripherals=[NSMutableDictionary dictionary];
+        _BLEMgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _discoveredPeripherals = [NSMutableDictionary dictionary];
         self.readingCharacteristic=nil;
     }
     return self;
@@ -64,7 +64,7 @@ NSString *const uexBLEValue=@"value";
 #pragma mark - Public Method
 -(void)scanDevice:(NSArray *)UUIDs{
     [self.discoveredPeripherals removeAllObjects];
-    NSMutableArray *CBUUIDs=[NSMutableArray array];
+    NSMutableArray *CBUUIDs = [NSMutableArray array];
     for(int i=0;i<[UUIDs count];i++){
         NSString* UUID=UUIDs[i];
         [CBUUIDs addObject:[CBUUID UUIDWithString:UUID]];
@@ -123,7 +123,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"invalid service UUID"];
         return;
     }
-    CBCharacteristic *characteristic=[self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
     if(!characteristic){
         [self log:@"invalid characteristic UUID"];
         return;
@@ -141,7 +141,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"cannot find service"];
         return;
     }
-    CBCharacteristic *characteristic=[self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
     if(!characteristic) {
         [self log:@"cannot find characteristic"];
         return;
@@ -163,7 +163,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"cannot find service"];
         return;
     }
-    CBCharacteristic *characteristic=[self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
     if(!characteristic) {
         [self log:@"cannot find characteristic"];
         return;
@@ -190,7 +190,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"cannot find service"];
         return;
     }
-    CBCharacteristic *characteristic=[self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
     if(!characteristic) {
         [self log:@"cannot find characteristic"];
         return;
@@ -217,7 +217,7 @@ NSString *const uexBLEValue=@"value";
         [self log:@"cannot find service"];
         return;
     }
-    CBCharacteristic *characteristic=[self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
     if(!characteristic) {
         [self log:@"cannot find characteristic"];
         return;
@@ -231,17 +231,61 @@ NSString *const uexBLEValue=@"value";
     
 }
 
+
+
+- (void)readRSSI{
+    if(!self.currentPeripheral||![self isConnected:self.currentPeripheral]){
+        [self log:@"not connect to a peripheral"];
+        return;
+    }
+    [self.currentPeripheral readRSSI];
+    
+}
+
+- (void)setNotifyEnable:(BOOL)enabled forCharacteristic:(NSString *)characteristicUUID inService:(NSString *)serviceUUID{
+    
+    if(!self.currentPeripheral||![self isConnected:self.currentPeripheral]){
+        [self log:@"not connect to a peripheral"];
+        return;
+    }
+    CBService* service = [self searchServiceInPeripheral:self.currentPeripheral ByUUID:serviceUUID];
+    if(!service){
+        [self log:@"cannot find service"];
+        return;
+    }
+    CBCharacteristic *characteristic = [self searchCharacteristicInService:service ByUUID:characteristicUUID];
+    if(!characteristic) {
+        [self log:@"cannot find characteristic"];
+        return;
+    }
+    [self.currentPeripheral setNotifyValue:enabled forCharacteristic:characteristic];
+}
+
+
 #pragma mark - CBPeripheralDelegate
+
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(nullable NSError *)error{
+    
+    NSInteger status = 0;
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    if (error) {
+        status = error.code;
+        [dict setValue:error.localizedDescription forKey:@"errStr"];
+    }
+    [dict setValue:@(status) forKey:@"status"];
+    [dict setValue:peripheral.RSSI forKey:@"rssi"];
+    [self callBackJsonWithName:@"onReadRemoteRssi" Object:dict];
+}
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
 
     if( peripheral.identifier == NULL  ) return; //  ios6 added
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     if (!error) {
         [self log:[NSString stringWithFormat:@"====%@\n",peripheral.name]];
         [self log:[NSString stringWithFormat:@"=========== %ld of service for UUID %@ ===========\n",(long)[peripheral.services count],peripheral.identifier.UUIDString]];
-        NSMutableArray *services=[NSMutableArray array];
+        NSMutableArray *services = [NSMutableArray array];
         for (CBService *service in peripheral.services){
             [self log:[NSString stringWithFormat:@"Service found with UUID: %@\n", service.UUID]];
             [services addObject:service.UUID.UUIDString];
@@ -257,15 +301,15 @@ NSString *const uexBLEValue=@"value";
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:service.UUID.UUIDString forKey:uexBLEServiceKey];
     if(error){
         [self log:[NSString stringWithFormat:@"discovering characteristics failed for error:%@",[error localizedDescription]]];
     }else{
-        NSMutableArray *characteristics=[NSMutableArray array];
+        NSMutableArray *characteristics = [NSMutableArray array];
         for(CBCharacteristic *characteristic in service.characteristics){
-        [characteristics addObject:[self parseCharacteristics:characteristic]];
-           [self.currentPeripheral setNotifyValue:YES forCharacteristic:characteristic];
+            [characteristics addObject:[self parseCharacteristics:characteristic]];
+            //[self.currentPeripheral setNotifyValue:YES forCharacteristic:characteristic];
             
         }
         [dict setValue:characteristics forKey:@"characteristics"];
@@ -274,13 +318,13 @@ NSString *const uexBLEValue=@"value";
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:characteristic.UUID.UUIDString forKey:uexBLECharacteristicKey];
     [dict setValue:characteristic.service.UUID.UUIDString forKey:uexBLEServiceKey];
     if(error){
         [self log:[NSString stringWithFormat:@"discovering descriptors failed for error:%@",[error localizedDescription]]];
     }else{
-        NSMutableArray *descriptors=[NSMutableArray array];
+        NSMutableArray *descriptors = [NSMutableArray array];
         for(CBDescriptor *descriptor in characteristic.descriptors){
             [descriptors addObject:[self parseDescriptor:descriptor]];
           
@@ -294,7 +338,7 @@ NSString *const uexBLEValue=@"value";
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
     if([self.readingCharacteristic isEqual:characteristic.UUID.UUIDString]) {
-        NSMutableDictionary *cbReadCharacteristic=[NSMutableDictionary dictionary];
+        NSMutableDictionary *cbReadCharacteristic = [NSMutableDictionary dictionary];
         NSNumber *result=@0;
         if(error) result=@1;
         [cbReadCharacteristic setValue:result forKey:@"result"];
@@ -307,7 +351,7 @@ NSString *const uexBLEValue=@"value";
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
-    NSMutableDictionary *cbWriteCharacteristic=[NSMutableDictionary dictionary];
+    NSMutableDictionary *cbWriteCharacteristic = [NSMutableDictionary dictionary];
     NSNumber *result=@0;
     if(error){
         result=@1;
@@ -319,7 +363,7 @@ NSString *const uexBLEValue=@"value";
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error{
-    NSMutableDictionary *cbReadDescriptor=[NSMutableDictionary dictionary];
+    NSMutableDictionary *cbReadDescriptor = [NSMutableDictionary dictionary];
     NSNumber *result=@0;
     if(error){
         result=@1;
@@ -332,7 +376,7 @@ NSString *const uexBLEValue=@"value";
   
 }
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error{
-    NSMutableDictionary *cbWriteDescriptor=[NSMutableDictionary dictionary];
+    NSMutableDictionary *cbWriteDescriptor = [NSMutableDictionary dictionary];
     NSNumber *result=@0;
     if(error){
         result=@1;
@@ -345,31 +389,31 @@ NSString *const uexBLEValue=@"value";
 }
 #pragma mark - CBCentralManagerDelegate
 -(void)centralManagerDidUpdateState:(CBCentralManager *)central{
-    NSString *stateStr=nil;
+    NSString *stateStr = nil;
     NSNumber *resultCode = @1;
     switch (central.state) {
         case CBCentralManagerStatePoweredOff:
-            stateStr=@"CentralManagerStatePoweredOff";
+            stateStr = @"CentralManagerStatePoweredOff";
             break;
         case CBCentralManagerStatePoweredOn:
-            stateStr=@"CentralManagerStatePoweredOn";
+            stateStr = @"CentralManagerStatePoweredOn";
             resultCode=@0;
             break;
         case CBCentralManagerStateResetting:
-            stateStr=@"CentralManagerStateResetting";
+            stateStr = @"CentralManagerStateResetting";
             break;
         case CBCentralManagerStateUnauthorized:
-            stateStr=@"CentralManagerStateUnauthorized";
+            stateStr = @"CentralManagerStateUnauthorized";
             break;
         case CBCentralManagerStateUnknown:
-            stateStr=@"CentralManagerStateUnknown";
+            stateStr = @"CentralManagerStateUnknown";
             break;
         case CBCentralManagerStateUnsupported:
-            stateStr=@"CentralManagerStateUnsupported";
+            stateStr = @"CentralManagerStateUnsupported";
             break;
 
     }
-    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:resultCode forKey:@"resultCode"];
     [dict setValue:stateStr forKey:@"info"];
     [self callBackJsonWithName:@"cbInit" Object:dict];
@@ -395,7 +439,7 @@ NSString *const uexBLEValue=@"value";
     if(![[_discoveredPeripherals allValues] containsObject:peripheral]){
         [_discoveredPeripherals setObject:peripheral forKey:peripheral.identifier.UUIDString];//发现新设备
         
-        NSMutableDictionary *onLeScan=[NSMutableDictionary dictionary];
+        NSMutableDictionary *onLeScan = [NSMutableDictionary dictionary];
         [onLeScan setValue:peripheral.identifier.UUIDString forKey:@"address"];
         [onLeScan setValue:peripheral.name forKey:@"name"];
         [self callBackJsonWithName:@"onLeScan" Object:onLeScan];
@@ -449,7 +493,7 @@ NSString *const uexBLEValue=@"value";
 
 -(void)callBackJsonWithName:(NSString *)name Object:(id)obj{
     const NSString *kPluginName = @"uexBluetoothLE";
-    NSString *result=[obj JSONFragment];
+    NSString *result = [obj JSONFragment];
     NSString *jsStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@('%@');}",kPluginName,name,kPluginName,name,result];
     
     if(self.callback){
@@ -464,15 +508,15 @@ NSString *const uexBLEValue=@"value";
 #pragma mark - Parse
 
 -(NSDictionary*)parseDescriptor:(CBDescriptor*)descriptor{
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [self log:[NSString stringWithFormat:@"parse descriptor:%@",descriptor.UUID.UUIDString]];
     [dict setValue:descriptor.UUID.UUIDString forKey:@"UUID"];
     [dict setValue:descriptor.characteristic.UUID.UUIDString forKey:uexBLECharacteristicKey];
     [dict setValue:descriptor.characteristic.service.UUID.UUIDString forKey:uexBLEServiceKey];
-    NSString* valueStr=nil;
+    NSString* valueStr = nil;
     id value=descriptor.value;
     if([value isKindOfClass:[NSNumber class]]){
-        valueStr=[value stringValue];
+        valueStr = [value stringValue];
         [dict setValue:@(NO) forKey:@"needDecode"];
     }
     if([value isKindOfClass:[NSString class]]){
@@ -481,7 +525,7 @@ NSString *const uexBLEValue=@"value";
         [dict setValue:@(NO) forKey:@"needDecode"];
     }
     if([value isKindOfClass:[NSData class]]){
-        valueStr=[self base64Encode:(NSData*)value];
+        valueStr = [self base64Encode:(NSData*)value];
         [dict setValue:@(YES) forKey:@"needDecode"];
     }
     [dict setValue:valueStr forKey:uexBLEValue];
@@ -493,18 +537,18 @@ NSString *const uexBLEValue=@"value";
 
 -(NSDictionary *)parseCharacteristics:(CBCharacteristic *)characteristic{
     [self log:[NSString stringWithFormat:@"parse characteristic:%@",characteristic.UUID.UUIDString]];
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:@(characteristic.properties) forKey:@"permissions"];
     if([characteristic isKindOfClass:[CBMutableCharacteristic class]]){
-        CBMutableCharacteristic * mCharacteristic=(CBMutableCharacteristic*)characteristic;
+        CBMutableCharacteristic * mCharacteristic = (CBMutableCharacteristic*)characteristic;
         [dict setValue:@(mCharacteristic.permissions) forKey:@"writeType"];
     }
 
     [dict setValue:characteristic.service.UUID.UUIDString forKey:uexBLEServiceKey];
     [dict setValue:characteristic.UUID.UUIDString forKey:@"UUID"];
-    NSString *valueStr=[self base64Encode:characteristic.value];
+    NSString *valueStr = [self base64Encode:characteristic.value];
     [dict setValue:valueStr forKey:uexBLEValue];
-    NSMutableArray *descriptorList=[NSMutableArray array];
+    NSMutableArray *descriptorList = [NSMutableArray array];
     for(CBDescriptor *descriptor in characteristic.descriptors){
         [descriptorList addObject:[self parseDescriptor:descriptor]];
     }
@@ -514,10 +558,10 @@ NSString *const uexBLEValue=@"value";
 }
 
 -(NSDictionary *)parseService:(CBService *)service{
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [self log:[NSString stringWithFormat:@"parse service:%@",service.UUID.UUIDString]];
     [dict setValue:service.UUID.UUIDString forKey:@"UUID"];
-    NSMutableArray *characteristicList=[NSMutableArray array];
+    NSMutableArray *characteristicList = [NSMutableArray array];
     for(CBCharacteristic *characteristic in service.characteristics){
         [characteristicList addObject:[self parseCharacteristics:characteristic]];
     }

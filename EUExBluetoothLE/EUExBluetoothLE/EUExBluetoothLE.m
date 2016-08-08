@@ -142,6 +142,26 @@
     
 }
 
+
+- (void)readRemoteRssi:(NSMutableArray *)inArguments{
+    [self.BLE readRSSI];
+}
+
+- (void)setCharacteristicNotification:(NSMutableArray *)inArguments{
+    if([inArgumrnts count]<1) return;
+    id info =[self getDataFromJson:inArgumrnts[0]];
+    if(![info isKindOfClass:[NSDictionary class]])return;
+    NSString *serviceUUID = info[uexBLEServiceKey];
+    NSString *characteristicUUID = info[uexBLECharacteristicKey];
+    NSNumber *enableNum = info[@"enable"];
+    if (!serviceUUID || !characteristicUUID || !enableNum) {
+        return;
+    }
+    [self.BLE setNotifyEnable:enableNum.boolValue forCharacteristic:characteristicUUID inService:serviceUUID];
+    
+}
+
+
 #pragma mark - Private Method
 
 - (id)getDataFromJson:(NSString *)jsonStr{

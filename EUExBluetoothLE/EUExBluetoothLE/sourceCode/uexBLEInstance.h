@@ -56,5 +56,8 @@ extern NSString *const uexBLEValue;
       inCharacteristic:(NSString*)characteristicUUID
              inService:(NSString*)serviceUUID
             dataString:(NSString *)dataStr;
-
+- (void)readRSSI;
+- (void)setNotifyEnable:(BOOL)enabled
+      forCharacteristic:(NSString *)characteristicUUID
+              inService:(NSString *)serviceUUID;
 @end
