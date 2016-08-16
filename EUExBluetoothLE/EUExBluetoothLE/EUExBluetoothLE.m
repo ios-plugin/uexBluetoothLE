@@ -148,8 +148,8 @@
 }
 
 - (void)setCharacteristicNotification:(NSMutableArray *)inArguments{
-    if([inArgumrnts count]<1) return;
-    id info =[self getDataFromJson:inArgumrnts[0]];
+    if([inArguments count]<1) return;
+    id info =[self getDataFromJson:inArguments[0]];
     if(![info isKindOfClass:[NSDictionary class]])return;
     NSString *serviceUUID = info[uexBLEServiceKey];
     NSString *characteristicUUID = info[uexBLECharacteristicKey];
