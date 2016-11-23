@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
-  <plugin uexName="uexBluetoothLE" version="3.0.6" build="6">
-    <info>6: 支持获取RSSI</info>
-    <build>5: IDE证书更新</build>
-    <build>4: 修复cbInit回调参数错误的bug</build>
-    <build>3: 添加IDE支持</build>
-    <build>2: 修复一个会导致Characteristic写入失败的bug</build>
-    <build>1: 修改读写的字符串均为为Base64编码</build>
-    <build>0: 低功耗蓝牙插件 for iOS</build>
-  </plugin>
+    <plugin
+        uexName="uexBluetoothLE" version="4.0.0" build="0">
+        <info>0:低功耗蓝牙插件 for iOS</info>
+    </plugin>
 </uexplugins>
+

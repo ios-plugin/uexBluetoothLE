@@ -6,19 +6,26 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		UpfI8Ui4R+tbXTp5usrRDUMXQQ8=
+		ir52T9uuwNhEN+yJaFV8/9UcnAM=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		JKbXoT98W7zj86Z2W3qbeHZe/kE=
+		VccYRc8+LJpEK2ajGtgIir/pOpk=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>embedded.mobileprovision</key>
-		<data>
-		JKbXoT98W7zj86Z2W3qbeHZe/kE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			VccYRc8+LJpEK2ajGtgIir/pOpk=
+			</data>
+			<key>hash2</key>
+			<data>
+			ejCBtnGtWqhlrYI4GRjoMJxaexgdSnhjWGPR+Vc9frw=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
     <plugin name="uexBluetoothLE">
-        
         <method name="init"></method>
         <method name="scanDevice"></method>
         <method name="stopScanDevice"></method>
@@ -15,6 +14,5 @@
         <method name="writeDescriptor"></method>
         <method name="readRemoteRssi"></method>
         <method name="setCharacteristicNotification"></method>
-        
     </plugin>
 </uexplugins>
